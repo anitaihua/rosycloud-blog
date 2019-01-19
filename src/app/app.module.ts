@@ -1,15 +1,38 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { NoticeListPage } from '../pages/notice-list/notice-list';
+import { ArticlePage } from '../pages/article/article';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CodePush } from '@ionic-native/code-push';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AES256 } from '@ionic-native/aes-256';
+
+import { MyAlert } from '../providers/my-alert.service';
+import { MyLoading } from '../providers/my-loading.service';
+import { MyCodePush } from '../providers/my-codepush.service';
+import { MyToast } from '../providers/my-toast.service';
+import { UserInfo } from '../providers/user-info.service';
+import { WebApi } from '../providers/web-api.service';
+
+import { ComponentsModule } from '../components/components.module';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+
+import { UpdatePopover } from './update.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -17,11 +40,23 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    NoticeListPage,
+    ArticlePage,
+    UpdatePopover
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp,{
+      platform:{
+        ios:{
+          backButtonText:'返回'
+        }
+      }
+    }),
+    ComponentsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +64,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    NoticeListPage,
+    ArticlePage,
+    UpdatePopover
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    CodePush,
+    AES256,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Keyboard,
+    ScreenOrientation,
+    MyAlert,
+    MyLoading,
+    MyCodePush,
+    MyToast,
+    UserInfo,
+    WebApi
   ]
 })
 export class AppModule {}

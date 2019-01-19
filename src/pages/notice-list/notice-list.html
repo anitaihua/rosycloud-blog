@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>查看通知</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotoNew()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color = "primary">
+    <ion-segment color="light" [(ngModel)]="noticeType" (ionChange) = "pullNewList()">
+      <ion-segment-button value="myreceived">我收到的</ion-segment-button>
+      <ion-segment-button value="mysent">我发送的</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-refresher my-refresher (ionRefresh)="onRefresh($event)"></ion-refresher>
+
+  <ion-list *ngFor="let item of list">
+    <button ion-item (click)="gotoDetail(item)">
+      <ion-avatar item-left>
+        <ion-img src="/assets/imgs/5.jpg"></ion-img>
+      </ion-avatar>
+      <h2 [style.color]="item.operateType==1?'red':''">{{item.logContent}}</h2>
+      <div style="color:gray;font-size:13px;margin-top:5px;">
+        <span>{{item.realName}}--{{item.logContent}}</span>
+        <span style="float:right;">{{item.operateTime}}</span>
+      </div>
+    </button>
+  </ion-list>
+  <h5 class="list-empty" *ngIf="list&&list.length==0">暂无通知</h5>
+
+  <div class="list-not-more" *ngIf="!hasMore">没有更多的了</div>
+
+  <ion-infinite-scroll my-infinite (ionInfinite)="onInfinite($event)" [enabled] = "hasMore"></ion-infinite-scroll>
+</ion-content>

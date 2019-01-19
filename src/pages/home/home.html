@@ -1,17 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>首页</ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content padding class="home">
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <!--下拉刷新-->
+  <ion-refresher my-refresher (ionRefresh)="onRefresh($event)"></ion-refresher>
+
+  <!--列表展示-->
+  <ion-card *ngFor="let item of list" >
+    <img src="/assets/imgs/d1.png" (click)="gotoDetail(item)"/>
+    <ion-card-content>
+      <ion-card-title>{{item.articleTitle}}</ion-card-title>
+      <p>{{item.articleContent}} </p>
+      <ion-row>
+        <ion-col width-33><button clear small><ion-icon name="thumbs-up"></ion-icon>{{item.articleViews}}赞</button></ion-col>
+        <ion-col width-33><button clear small><ion-icon name="play"></ion-icon>播放</button></ion-col>
+        <ion-col width-33><button clear small><ion-icon name="share-alt"></ion-icon>分享</button></ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <h5 class="list-empty" *ngIf="list&&list.length==0">暂无通知</h5>
+
+  <div class="list-not-more" *ngIf="!hasMore">没有更多的了</div>
+  <ion-infinite-scroll my-infinite (ionInfinite)="onInfinite($event)" [enabled] = "hasMore"></ion-infinite-scroll>
 </ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "rosycloud-blog",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
