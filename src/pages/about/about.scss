@@ -15,10 +15,11 @@ page-about{
             overflow: hidden;
             text-align: center;
             .item {
+                
                 height: rem(200)/$rem;
                 display: inline-block;
                 background-color: danger;
-                margin:rem(48)/$rem 0 rem(48)/$rem rem(48)/$rem;
+                margin:rem(48)/$rem 0 rem(96)/$rem rem(96)/$rem;
                 img{
                     height: rem(133)/$rem;
                     background-size: rem(133)/$rem rem(133)/$rem;
@@ -27,6 +28,7 @@ page-about{
                     height: rem(26)/$rem;
                     font-size: rem(40)/$rem;
                 }
+                
             }
         }
     }
