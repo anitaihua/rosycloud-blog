@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,209 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// 页面适配
+// 根元素大小使用 vw 单位
+$vm_fontsize: 36; // 是$vm_design 值得十分之一
+$vm_design: 360; // 根据需要替换成设计稿的值,比如设计稿给你的宽度是360px,
+html {
+  font-size: ($vm_fontsize / $vm_design) * 100vw; // 同时，通过Media Queries 限制根元素最大最小值
+  @media screen and (max-width: 320px) {
+    font-size: 32px;
+  }
+  @media screen and (min-width: 540px) {
+    font-size: 54px;
+  }
+}
+
+// body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
+body {
+  max-width: 540px;
+  min-width: 320px;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: transparent;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+sumary {
+  margin: 0;
+  padding: 0;
+}
+
+//清除输入框内阴影
+input,
+select,
+textarea {
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+//禁止选中文本内容
+*:not(input, select, textArea) {
+  -webkit-user-select: none;
+}
+
+//禁用长按页面时的弹出菜单(iOS下有效) ,img和a标签都要加
+img,
+a {
+  -webkit-touch-callout: none;
+}
+
+a,
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+//去掉点击链接和文本框对象时默认的灰色半透明覆盖层(iOS)或者虚框(Android)
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.back-button-icon-md,
+.back-button-icon-ios {
+  font-size: rem(28);
+}
+
+.back-button-ios {
+  min-height: rem(32);
+}
+
+//icon 定位在页面的右侧,添加在ion-icon 标签上
+.icon-right {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//item固有高度
+.item-block {
+  min-height: rem(44);
+}
+
+//checkbox框样式
+.checkbox-ios .checkbox-icon {
+  border-radius: 4px;
+}
+
+.item.item-ios .checkbox-ios {
+  margin: rem(15) 0;
+  margin-right: rem(9);
+}
+
+//菜单图标
+.bar-button-menutoggle-ios ion-icon {
+  font-size: rem(24);
+}
+
+//icon
+.item>ion-icon,
+.item-inner>ion-icon {
+  font-size: rem(28);
+  min-height: rem(28);
+}
+
+// 时间选择器配置
+.picker-ios .picker-opt {
+  height: rem(45);
+}
+
+.center {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+}
+
+.space-between {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.space-around {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.toast-middle{
+  width: 50px;
+}
+.toast-ios .toast-message{
+  text-align: center;
+}
