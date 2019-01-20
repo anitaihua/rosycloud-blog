@@ -1,3 +1,33 @@
-page-about {
-
+page-about{
+    font-size: rem(50);
+    .recommend{
+        .banner{
+            width: 100%;
+            height: rem(385);
+            img{
+                width: 100%;
+                height: rem(385);
+            } 
+        }
+        .nav{
+            white-space: nowrap;
+            height: rem(298);
+            overflow: hidden;
+            text-align: center;
+            .item {
+                height: rem(200);
+                display: inline-block;
+                background-color: danger;
+                margin:rem(48) 0 rem(48) rem(48);
+                img{
+                    height: rem(133);
+                    background-size: rem(133) rem(133);
+                }
+                .nav-title{
+                    height: rem(26);
+                    font-size: rem(40);
+                }
+            }
+        }
+    }
 }

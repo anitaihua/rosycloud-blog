@@ -14,8 +14,10 @@ export class TabsPage {
   tab2Root = AboutPage;
   tab3Root = ContactPage;
   tab4Root = NoticeListPage;
+  tab5Root = NoticeListPage;
 
   constructor() {
 
   }
+  
 }

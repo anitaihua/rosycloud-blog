@@ -1,11 +1,72 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
+  <ion-toolbar color = "light">
+    <ion-segment color="orange" [(ngModel)]="infoType">
+      <ion-segment-button value="recommend">推荐</ion-segment-button>
+      <ion-segment-button value="blogBook">博客书</ion-segment-button>
+      <ion-segment-button value="serialize">连载</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+    <div [ngSwitch]="infoType">
+        <div *ngSwitchCase="'recommend'">
+            <div class="recommend">
+                <ion-slides class="banner">
+                    <ion-slide class="item">
+                        <img src="/assets/imgs/nav1.jpg" alt="">
+                    </ion-slide>
+                    <ion-slide class="item">
+                        <img src="/assets/imgs/nav2.jpg" alt="">
+                    </ion-slide>
+                </ion-slides>
+                <ion-scroll scrollX="true" class="nav ion-scrall-style">
+                    <div class="item">
+                        <img src="/assets/imgs/ico-01.png" alt="">
+                        <div class="nav-title">时评</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-02.png" alt="">
+                        <div class="nav-title">财经</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-03.png" alt="">
+                        <div class="nav-title">文史</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-04.png" alt="">
+                        <div class="nav-title">教育</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-05.png" alt="">
+                        <div class="nav-title">娱乐</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-06.png" alt="">
+                        <div class="nav-title">育儿</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-07.png" alt="">
+                        <div class="nav-title">美食</div>
+                    </div>
+                    <div class="item">
+                        <img src="/assets/imgs/ico-08.png" alt="">
+                        <div class="nav-title">旅游</div>
+                    </div>
+                  </ion-scroll>
+            </div>
+        </div>
+        <div *ngSwitchCase="'blogBook'">
+            <div class="blogBook">
+              2
+            </div>
+        </div>
+        <div *ngSwitchCase="'serialize'">
+            <div class="serialize">
+              3
+            </div>
+        </div>
+    </div>
 
 </ion-content>

@@ -7,6 +7,9 @@ import { NavController } from 'ionic-angular';
 })
 export class AboutPage {
 
+  //信息类型
+  private infoType = 'recommend';
+
   constructor(public navCtrl: NavController) {
 
   }
