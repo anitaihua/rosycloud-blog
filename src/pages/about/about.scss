@@ -1,31 +1,31 @@
+
 page-about{
-    font-size: rem(50);
     .recommend{
         .banner{
             width: 100%;
-            height: rem(385);
+            height: rem(385)/$rem;
             img{
                 width: 100%;
-                height: rem(385);
+                height: rem(385)/$rem;
             } 
         }
         .nav{
             white-space: nowrap;
-            height: rem(298);
+            height: rem(298)/$rem;
             overflow: hidden;
             text-align: center;
             .item {
-                height: rem(200);
+                height: rem(200)/$rem;
                 display: inline-block;
                 background-color: danger;
-                margin:rem(48) 0 rem(48) rem(48);
+                margin:rem(48)/$rem 0 rem(48)/$rem rem(48)/$rem;
                 img{
-                    height: rem(133);
-                    background-size: rem(133) rem(133);
+                    height: rem(133)/$rem;
+                    background-size: rem(133)/$rem rem(133)/$rem;
                 }
                 .nav-title{
-                    height: rem(26);
-                    font-size: rem(40);
+                    height: rem(26)/$rem;
+                    font-size: rem(40)/$rem;
                 }
             }
         }

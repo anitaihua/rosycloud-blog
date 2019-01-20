@@ -14,8 +14,10 @@
 // automatically applied to the <body> element in the app.
 // 页面适配
 // 根元素大小使用 vw 单位
-$vm_fontsize: 112.5; // 是$vm_design 值得十分之一
-$vm_design: 1125; // 根据需要替换成设计稿的值,比如设计稿给你的宽度是360px,
+$rem: 3.125;
+
+$vm_fontsize: 36; // 是$vm_design 值得十分之一
+$vm_design: 360; // 根据需要替换成设计稿的值,比如设计稿给你的宽度是360px,
 html {
   font-size: ($vm_fontsize / $vm_design) * 100vw; // 同时，通过Media Queries 限制根元素最大最小值
   @media screen and (max-width: 320px) {
