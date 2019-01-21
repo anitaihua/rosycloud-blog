@@ -9,20 +9,21 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher my-refresher (ionRefresh)="onRefresh($event,infoType)"></ion-refresher>
 
     <div [ngSwitch]="infoType">
         <div *ngSwitchCase="'recommend'">
             <div class="recommend">
                 <ion-slides class="banner">
-                    <ion-slide class="item">
+                    <ion-slide class="item ">
                         <img src="/assets/imgs/nav1.jpg" alt="">
                     </ion-slide>
                     <ion-slide class="item">
                         <img src="/assets/imgs/nav2.jpg" alt="">
                     </ion-slide>
                 </ion-slides>
-                <ion-scroll scrollX="true" class="nav ion-scrall-style">
-                    <div class="item">
+                <ion-scroll scrollX="true" class="nav">
+                    <div class="item item-first">
                         <img src="/assets/imgs/ico-01.png" alt="">
                         <div class="nav-title">时评</div>
                     </div>
@@ -50,11 +51,44 @@
                         <img src="/assets/imgs/ico-07.png" alt="">
                         <div class="nav-title">美食</div>
                     </div>
-                    <div class="item">
+                    <div class="item item-last">
                         <img src="/assets/imgs/ico-08.png" alt="">
                         <div class="nav-title">旅游</div>
                     </div>
                   </ion-scroll>
+                  <div class="nav-line"></div>
+                  <ion-list class="info-list" *ngFor="let item of infoList">
+                      <div class="item" *ngIf="!item.isImage">
+                            <div class="box">
+                                <div class="item-title">{{ item.title}}</div>
+                                <div class="item-des">{{item.des}}</div>
+                            </div>
+                            <div class="item-bottom">
+                                <ion-icon name="person"></ion-icon><div class="item-user">{{item.realName}}</div>
+                                <ion-icon name="chatboxes"></ion-icon><div class="item-messagenum"> {{item.msgNum}}</div>
+                                <ion-icon name="heart"></ion-icon><div class="item-liked">{{item.liked}}</div>
+                            </div>
+                      </div>
+                      <div class="item images" *ngIf="item.isImage">
+                            <div class="box">
+                                <div class="box-left">
+                                    <div class="item-title">{{ item.title}}</div>
+                                    <div class="item-des">{{item.des}}</div>
+                                </div>
+                                <div class="box-right">
+                                    <img src="{{item.url}}" alt="">
+                                </div>
+                                
+                            </div>
+                            <div class="item-bottom">
+                                <ion-icon name="person"></ion-icon><div class="item-user">{{item.realName}}</div>
+                                <ion-icon name="chatboxes"></ion-icon><div class="item-messagenum"> {{item.msgNum}}</div>
+                                <ion-icon name="heart"></ion-icon><div class="item-liked">{{item.liked}}</div>
+                            </div>
+                    </div>
+                  </ion-list>
+                  
+
             </div>
         </div>
         <div *ngSwitchCase="'blogBook'">
@@ -68,5 +102,6 @@
             </div>
         </div>
     </div>
+  <ion-infinite-scroll my-infinite (ionInfinite)="onInfinite($event,infoType)" [enabled] = "hasMore"></ion-infinite-scroll>
 
 </ion-content>

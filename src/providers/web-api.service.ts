@@ -197,6 +197,9 @@ export class WebApi {
     public getArticleList(page: number, limit: number){
         return this.post('articles/list', { 'page': page, 'limit': limit });
     }
+    public getInfoList(page: number, limit: number){
+        return this.post('articles/list', { 'page': page, 'limit': limit });
+    }
     public getUserInfoOnline() {
         return this.get('users/userinfo','');
     }

@@ -1,0 +1,98 @@
+
+page-discover{
+    .recommend{
+        .banner{
+            width: 100%;
+            height: rem(385)/$rem;
+            img{
+                width: 100%;
+                height: rem(385)/$rem;
+            } 
+        }
+        .nav{
+            white-space: nowrap;
+            height: rem(298)/$rem;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+            .item {
+                
+                height: rem(226)/$rem;
+                display: inline-block;
+                margin:rem(48)/$rem rem(48)/$rem 0 rem(48)/$rem;
+            
+                img{
+                    height: rem(133)/$rem;
+                    background-size: rem(133)/$rem rem(133)/$rem;
+                }
+                .nav-title{
+                    margin: rem(10)/$rem;
+                    height: rem(26)/$rem;
+                    font-size: rem(40)/$rem;
+                }
+                
+            }
+        }
+        .nav-line{
+            display: block;
+            background-color: #f7f7f7;
+            width: 100%;
+            height: rem(26)/$rem;
+        }
+        .info-list{
+            width: 100%;
+            .item{
+
+                margin: rem(49)/$rem;
+                .box{
+
+                    .item-title{
+                        font-size: rem(44)/$rem;
+                        font-weight:bold;
+                        line-height: rem(70)/$rem;
+                    }
+                    .item-des{
+                        font-size: rem(34)/$rem;
+                        line-height: rem(60)/$rem;
+                        color: #8b8b8b;
+                    }
+                }
+                
+                .item-bottom{
+                    font-size: rem(36)/$rem;
+                    float: left;
+                    width: 100%;
+                    display: block;
+                    color: #c7c7c7;
+                    margin-top: rem(52)/$rem;
+                    .item-user{
+                        display:inline;
+                        max-width: rem(194)/$rem;
+                    }
+                    .item-messagenum{
+                        display:inline;
+                        max-width: rem(70)/$rem;
+                    }
+                    .item-liked{
+                        display:inline;
+                    }
+                }
+            }
+            .images{
+                
+                .box{
+                    height: rem(260)/$rem;
+                    .box-left{
+                        width: 68%;
+                        float: left;
+                    }
+                    .box-right{
+                        float: right;
+                        width: rem(260)/$rem;
+                    }
+                }
+            }
+        }
+        
+    }
+}
