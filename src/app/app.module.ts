@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CodePush } from '@ionic-native/code-push';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AES256 } from '@ionic-native/aes-256';
+import { SQLite } from '@ionic-native/sqlite'
 
 import { MyAlert } from '../providers/my-alert.service';
 import { MyLoading } from '../providers/my-loading.service';
@@ -25,6 +26,8 @@ import { MyCodePush } from '../providers/my-codepush.service';
 import { MyToast } from '../providers/my-toast.service';
 import { UserInfo } from '../providers/user-info.service';
 import { WebApi } from '../providers/web-api.service';
+import { DBService } from '../providers/my-db.service';
+
 
 import { ComponentsModule } from '../components/components.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -74,6 +77,8 @@ import { UpdatePopover } from './update.component';
     SplashScreen,
     CodePush,
     AES256,
+    SQLite,
+    
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Keyboard,
     ScreenOrientation,
@@ -82,7 +87,8 @@ import { UpdatePopover } from './update.component';
     MyCodePush,
     MyToast,
     UserInfo,
-    WebApi
+    WebApi,
+    DBService
   ]
 })
 export class AppModule {}

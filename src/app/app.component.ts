@@ -8,6 +8,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { MyCodePush} from '../providers/my-codepush.service'
 
+import { DBService } from '../providers/my-db.service';
+
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -22,7 +24,8 @@ export class MyApp {
     private screenOrientation: ScreenOrientation,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private myCodePush: MyCodePush
+    private myCodePush: MyCodePush,
+    private db: DBService
   ) {
     this.platform.ready().then(() => {
       if(this.platform.is('cordova')){
@@ -32,9 +35,13 @@ export class MyApp {
         this.screenOrientation.lock('portrait');
         this.keyboard.hideFormAccessoryBar(false);
 
+        // 初始化数据库
+        this.db.initDB();
+        
         //发起热更新
         this.myCodePush.hotUpdate();
       }
+      
     });
 
     //后台唤醒
