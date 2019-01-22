@@ -5,12 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Keyboard } from '@ionic-native/keyboard';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { JPush } from '@jiguang-ionic/jpush';
 
 import { MyCodePush} from '../providers/my-codepush.service'
 
 import { DBService } from '../providers/my-db.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +27,8 @@ export class MyApp {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private myCodePush: MyCodePush,
-    private db: DBService
+    private db: DBService,
+    private jpush: JPush
   ) {
     this.platform.ready().then(() => {
       if(this.platform.is('cordova')){
@@ -34,6 +37,10 @@ export class MyApp {
         this.statusBar.backgroundColorByHexString('#5077aa');
         this.screenOrientation.lock('portrait');
         this.keyboard.hideFormAccessoryBar(false);
+
+        //初始化极光推送
+        jpush.init();
+        jpush.setDebugMode(true);
 
         // 初始化数据库
         this.db.initDB();

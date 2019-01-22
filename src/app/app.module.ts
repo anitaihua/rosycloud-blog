@@ -18,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CodePush } from '@ionic-native/code-push';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AES256 } from '@ionic-native/aes-256';
-import { SQLite } from '@ionic-native/sqlite'
+import { SQLite } from '@ionic-native/sqlite';
+import { JPush } from '@jiguang-ionic/jpush';
 
 import { MyAlert } from '../providers/my-alert.service';
 import { MyLoading } from '../providers/my-loading.service';
@@ -27,6 +28,7 @@ import { MyToast } from '../providers/my-toast.service';
 import { UserInfo } from '../providers/user-info.service';
 import { WebApi } from '../providers/web-api.service';
 import { DBService } from '../providers/my-db.service';
+
 
 
 import { ComponentsModule } from '../components/components.module';
@@ -78,7 +80,7 @@ import { UpdatePopover } from './update.component';
     CodePush,
     AES256,
     SQLite,
-    
+    JPush,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Keyboard,
     ScreenOrientation,

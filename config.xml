@@ -89,5 +89,9 @@
     <plugin name="cordova-plugin-screen-orientation" spec="3.0.1" />
     <plugin name="cordova-plugin-aes256-encryption" spec="1.1.0" />
     <plugin name="cordova-sqlite-storage" spec="2.6.0" />
+    <plugin name="jpush-phonegap-plugin" spec="^3.6.2">
+        <variable name="APP_KEY" value="cc9e33eb53d343ece86ad7ca" />
+        <variable name="CHANNEL" value="developer-default" />
+    </plugin>
     <engine name="android" spec="7.1.4" />
 </widget>
