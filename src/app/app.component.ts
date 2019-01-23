@@ -10,7 +10,12 @@ import { MyCodePush} from '../providers/my-codepush.service'
 
 import { DBService } from '../providers/my-db.service';
 
+import { JpushProvider } from '../providers/my-jpush.service';
+
+import { MyAlert } from '../providers/my-alert.service';
+
 import { TabsPage } from '../pages/tabs/tabs';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +30,9 @@ export class MyApp {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private myCodePush: MyCodePush,
-    private db: DBService
+    private db: DBService,
+    private jPushProvider: JpushProvider,
+    private myAlert: MyAlert
   ) {
     this.platform.ready().then(() => {
       if(this.platform.is('cordova')){
@@ -34,6 +41,9 @@ export class MyApp {
         this.statusBar.backgroundColorByHexString('#5077aa');
         this.screenOrientation.lock('portrait');
         this.keyboard.hideFormAccessoryBar(false);
+
+        //初始化极光推送
+        this.getPushMessage();
 
         // 初始化数据库
         this.db.initDB();
@@ -50,5 +60,20 @@ export class MyApp {
       this.myCodePush.hotUpdate();
     });
     
+  }
+
+
+  /**
+   * 点击推送消息
+   */
+  getPushMessage(){
+    let request=this.jPushProvider.openNotification().subscribe(result=>{
+      if(""==result){
+        return;
+     }
+      this.myAlert.showBasic(JSON.stringify(result),function(r){
+        console.log(r);
+      });
+    });
   }
 }

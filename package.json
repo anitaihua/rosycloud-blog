@@ -31,6 +31,8 @@
     "@ionic-native/sqlite": "^4.5.2",
     "@ionic-native/status-bar": "~4.18.0",
     "@ionic/storage": "2.2.0",
+    "@jiguang-ionic/jpush": "^1.0.2",
+    "@types/ws": "^6.0.1",
     "code-push": "^2.0.6",
     "com-sarriaroman-photoviewer": "^1.1.18",
     "cordova-android": "7.1.4",
@@ -44,6 +46,7 @@
     "cordova-plugin-file-transfer": "^1.6.3",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.3.2",
+    "cordova-plugin-jcore": "^1.2.7",
     "cordova-plugin-screen-orientation": "^3.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
@@ -53,8 +56,10 @@
     "es6-promise-plugin": "^4.2.2",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "jpush-phonegap-plugin": "^3.6.2",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
+    "ws": "^6.1.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -78,9 +83,10 @@
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-aes256-encryption": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-file": {},
-      "cordova-plugin-file-transfer": {},
-      "cordova-plugin-zip": {}
+      "jpush-phonegap-plugin": {
+        "APP_KEY": "cc9e33eb53d343ece86ad7ca",
+        "CHANNEL": "developer-default"
+      }
     },
     "platforms": [
       "android"
