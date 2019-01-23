@@ -11,6 +11,8 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NoticeListPage } from '../pages/notice-list/notice-list';
 import { ArticlePage } from '../pages/article/article';
+import { MyPage } from '../pages/my/my';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -48,6 +50,7 @@ import { UpdatePopover } from './update.component';
     TabsPage,
     NoticeListPage,
     ArticlePage,
+    MyPage,
     UpdatePopover
   ],
   imports: [
@@ -72,6 +75,7 @@ import { UpdatePopover } from './update.component';
     TabsPage,
     NoticeListPage,
     ArticlePage,
+    MyPage,
     UpdatePopover
   ],
   providers: [

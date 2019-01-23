@@ -1,0 +1,26 @@
+<!--
+  Generated template for the MyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content>
+  <div class="login-content" [style.background-image]="backgroundImage">
+    <div class="login-header">
+      <img [src]="userLogo">
+      <div class="nike">用户123654213</div>
+      <div class="des">暂无简介</div>
+      <div class="like-box">
+        <div class="love">关注 0</div>|<div class="fans">粉丝 1</div>
+      </div>
+    </div>
+    <ion-list>
+      <div class="login-item" ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+        {{ item.name }}
+        <div clear item-end>{{ item.nums }}></div>
+      </div>  
+    </ion-list>
+  </div>
+</ion-content>

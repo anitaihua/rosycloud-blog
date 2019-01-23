@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="orange">
     <ion-title>查看通知</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="gotoNew()">
@@ -8,7 +8,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar color = "primary">
+  <ion-toolbar color = "orange">
     <ion-segment color="light" [(ngModel)]="noticeType" (ionChange) = "pullNewList()">
       <ion-segment-button value="myreceived">我收到的</ion-segment-button>
       <ion-segment-button value="mysent">我发送的</ion-segment-button>

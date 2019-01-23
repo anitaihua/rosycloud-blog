@@ -16,6 +16,8 @@ export class WebApi {
     // 域名地址
     private API_HOST = 'http://127.0.0.1:9101/';
 
+    public FILESERVE_HOST = 'http://47.94.2.176/';
+
     // 请求头
     private headers: Headers;
 

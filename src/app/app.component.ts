@@ -49,7 +49,7 @@ export class MyApp {
         this.db.initDB();
         
         //发起热更新
-        this.myCodePush.hotUpdate();
+        //this.myCodePush.hotUpdate();
       }
       
     });
@@ -57,7 +57,7 @@ export class MyApp {
     //后台唤醒
     this.platform.resume.subscribe(()=>{
       //发起热更新
-      this.myCodePush.hotUpdate();
+      //this.myCodePush.hotUpdate();
     });
     
   }
@@ -71,8 +71,8 @@ export class MyApp {
       if(""==result){
         return;
      }
-      this.myAlert.showBasic(JSON.stringify(result),function(r){
-        console.log(r);
+      this.myAlert.showBasic(JSON.stringify(result),function(){
+        console.log('click jpush button');
       });
     });
   }

@@ -1,0 +1,38 @@
+page-my {
+    .login-content{
+        width: 100%;
+        height: 100%;
+        background-size: 100% auto;
+        .login-header{
+            height: rem(720)/$rem;
+            text-align: center;
+            color: #ffffff;
+            line-height: rem(90)/$rem;
+            img{
+                margin-top: rem(144)/$rem;
+                width: rem(252)/$rem;
+                height: rem(252)/$rem;
+                border-radius:50%; 
+                overflow:hidden;
+            }
+            .nike{
+                font-size: rem(46)/$rem;
+            }
+            .like-box{
+                font-size: rem(40)/$rem;
+                .love{
+                    display: inline-block;
+                }
+                .fans{
+                    display: inline-block;
+
+                }
+            }
+        }
+        .login-item{
+            height: rem(206)/$rem;
+            color: #919191;
+            font-size: rem(40)/$rem;
+        }
+    }
+}
