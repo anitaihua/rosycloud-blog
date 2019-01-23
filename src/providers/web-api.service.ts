@@ -14,7 +14,7 @@ import { UserInfo } from './user-info.service';
 export class WebApi {
 
     // 域名地址
-    private API_HOST = 'http://10.10.10.121:9101/';
+    private API_HOST = 'http://127.0.0.1:9101/';
 
     // 请求头
     private headers: Headers;
