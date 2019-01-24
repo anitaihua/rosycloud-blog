@@ -8,31 +8,37 @@ export class UserInfo {
 
     public token: string;
     public uuid: string;
-
-    public des: string;
-    public email: string;
-    public face: string;
-    public mobile: string;
-    public nickName: string;
-    public officePhone: string;
-    public realName: string;
+    
+    
     public userId: number;
     public userName: string;
+    public nickName: string;
+    public realName: string;
+    public email: string;
+    public telephoneNumber: string;
+    public profilePhoto: string;
+    public backgroundPhoto: string;
+    public introduction: string;
+    public level: string;
+    public birthday: Date;
 
     /**
      * 设置用户详情
      * @param data 详情信息
      */
     public setExtra(data: any) {
-        this.des = data.des;
         this.email = data.email;
-        this.face = data.face;
-        this.mobile = data.mobile;
+        this.profilePhoto = data.profilePhoto;
+        this.telephoneNumber = data.telephoneNumber;
         this.nickName = data.nickName;
-        this.officePhone = data.officePhone;
         this.realName = data.realName;
         this.userId = data.userId;
         this.userName = data.userName;
+
+        this.backgroundPhoto = data.backgroundPhoto;
+        this.introduction = data.introduction;
+        this.level = data.level;
+        this.birthday = data.birthday;
     }
 
     /**

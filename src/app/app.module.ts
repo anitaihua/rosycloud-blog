@@ -12,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { NoticeListPage } from '../pages/notice-list/notice-list';
 import { ArticlePage } from '../pages/article/article';
 import { MyPage } from '../pages/my/my';
+import { LoginPage } from '../pages/login/login';
+import { UserInfoPage } from '../pages/user-info/user-info';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -51,6 +53,8 @@ import { UpdatePopover } from './update.component';
     NoticeListPage,
     ArticlePage,
     MyPage,
+    LoginPage,
+    UserInfoPage,
     UpdatePopover
   ],
   imports: [
@@ -76,6 +80,8 @@ import { UpdatePopover } from './update.component';
     NoticeListPage,
     ArticlePage,
     MyPage,
+    LoginPage,
+    UserInfoPage,
     UpdatePopover
   ],
   providers: [

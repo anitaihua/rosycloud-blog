@@ -14,7 +14,7 @@ import { UserInfo } from './user-info.service';
 export class WebApi {
 
     // 域名地址
-    private API_HOST = 'http://127.0.0.1:9101/';
+    private API_HOST = 'http://192.168.2.237:9101/';
 
     public FILESERVE_HOST = 'http://47.94.2.176/';
 
@@ -140,6 +140,16 @@ export class WebApi {
         return key + '=' + encodeURIComponent(value === null ? '' : String(value));
     }
 
+    /**
+     * 获取用户信息
+     */
+    public getStorageUserInfo() {
+        // 读取本地存储
+        this.storage.get('token').then((data) => {
+            return data || '';
+        });
+
+    }
 
     /**
      * 获取用户信息
@@ -158,7 +168,7 @@ export class WebApi {
             // 生成请求头
             this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
 
-            return this.get('users/userinfo','').then((data) => {
+            return this.get('user/info','').then((data) => {
                 this.userInfo.setExtra(data);
             });
         });
@@ -176,10 +186,13 @@ export class WebApi {
                 this.storage.set('token', data.data.token);
                 this.storage.set('uuid', this.userInfo.uuid);
                 this.userInfo.token = data.data.token;
-                this.userInfo.setExtra(data.data.userInfo);
+                
 
                 // 生成请求头
                 this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
+                this.get('user/info','').then((data) => {
+                    this.userInfo.setExtra(data.data);
+                });
             });
     }
 
@@ -197,12 +210,10 @@ export class WebApi {
         return this.post('log/list', { 'page': page, 'limit': limit, 'type': noticeType });
     }
     public getArticleList(page: number, limit: number){
-        return this.post('articles/list', { 'page': page, 'limit': limit });
+        return this.post('article/list', { 'page': page, 'limit': limit });
     }
     public getInfoList(page: number, limit: number){
-        return this.post('articles/list', { 'page': page, 'limit': limit });
+        return this.post('article/list', { 'page': page, 'limit': limit });
     }
-    public getUserInfoOnline() {
-        return this.get('users/userinfo','');
-    }
+
 }
