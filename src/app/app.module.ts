@@ -39,6 +39,7 @@ import { ComponentsModule } from '../components/components.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { UpdatePopover } from './update.component';
+import { SettingPage } from '../pages/setting/setting';
 
 
 
@@ -55,17 +56,14 @@ import { UpdatePopover } from './update.component';
     MyPage,
     LoginPage,
     UserInfoPage,
+    SettingPage,
     UpdatePopover
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{
-      platform:{
-        ios:{
-          backButtonText:'返回'
-        }
-      }
+      backButtonText:''
     }),
     ComponentsModule,
     IonicStorageModule.forRoot()
@@ -82,6 +80,7 @@ import { UpdatePopover } from './update.component';
     MyPage,
     LoginPage,
     UserInfoPage,
+    SettingPage,
     UpdatePopover
   ],
   providers: [

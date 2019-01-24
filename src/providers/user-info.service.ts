@@ -6,19 +6,20 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UserInfo {
 
+
     public token: string;
     public uuid: string;
     
     
     public userId: number;
-    public userName: string;
+    public userName: string = '登陆';
     public nickName: string;
     public realName: string;
     public email: string;
     public telephoneNumber: string;
     public profilePhoto: string;
     public backgroundPhoto: string;
-    public introduction: string;
+    public introduction: string = '暂无简介';
     public level: string;
     public birthday: Date;
 

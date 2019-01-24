@@ -1,0 +1,13 @@
+page-setting {
+    .setting-item{
+        height: rem(206)/$rem;
+        color: #919191;
+        font-size: rem(40)/$rem;
+    }
+    .setting-item-logout{
+        text-align: center;
+        height: rem(206)/$rem;
+        color: #ed7a50;
+        font-size: rem(60)/$rem;
+    }
+}

@@ -1,0 +1,25 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>设置</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+      <ion-list>
+        <div class="setting-item" ion-item *ngFor="let item of items" (click)="itemSelected(item.id)">
+          {{ item.name }}
+          <div clear item-end>{{ item.nums }}></div>
+        </div>  
+      </ion-list>
+      <ion-list  *ngIf = "logOutItem">
+          <div class="setting-item-logout" ion-item  (click)="logOut()">
+              退出当前账号
+          </div>  
+      </ion-list>
+
+</ion-content>

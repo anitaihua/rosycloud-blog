@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { MyToast } from './my-toast.service';
 import { UserInfo } from './user-info.service';
 
+
 /**
  * 网络接口集合
  */
@@ -14,7 +15,7 @@ import { UserInfo } from './user-info.service';
 export class WebApi {
 
     // 域名地址
-    private API_HOST = 'http://192.168.2.237:9101/';
+    private API_HOST = 'http://10.10.10.121:9101/';
 
     public FILESERVE_HOST = 'http://47.94.2.176/';
 
@@ -86,14 +87,19 @@ export class WebApi {
                 return response.json();
             }else{
                 // 601错误：token过期
+                console.log('errorCode:'+response.json().meta.errorCode);
                 if (response.json().meta.errorCode == 601) {
+                    response.status = 601;
                     this.events.publish('token:expired');
-                    if (this.userInfo.token != '') this.myToast.show('登陆状态过期');
+                    if (this.userInfo.token == null || this.userInfo.token == '') this.myToast.show('登陆状态过期');
+                }if (response.json().meta.errorCode == 602) {
+                    response.status = 602;
+                    this.myToast.show('用户名或密码错误');
                 }else{
                     this.myToast.show(response.json().meta.message);
                 }
-
-                throw response;
+                
+                return response.json();
             }
             
 
@@ -169,7 +175,14 @@ export class WebApi {
             this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
 
             return this.get('user/info','').then((data) => {
-                this.userInfo.setExtra(data);
+
+                if (!data.meta.success) {
+                    this.storage.set('isLogin', false);
+                }else{
+                    this.userInfo.setExtra(data.data);
+                    this.storage.set('isLogin', true);
+                }
+                
             });
         });
     }
@@ -193,6 +206,7 @@ export class WebApi {
                 this.get('user/info','').then((data) => {
                     this.userInfo.setExtra(data.data);
                 });
+                this.events.publish('user:refresh');
             });
     }
 
