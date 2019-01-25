@@ -95,6 +95,10 @@ export class MyPage {
           this.userLogo = this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+this.userInfomation.profilePhoto);
         
           this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url('+this.webApi.FILESERVE_HOST+this.userInfomation.backgroundPhoto+')');
+        } else {
+          this.items = [{id:1,name:'公开博文'},{id:2,name:'私密博文'},{id:3,name:'我的主题'},{id:4,name:'草稿箱'},{id:5,name:'收藏夹'}];
+          this.userLogo=this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+'group1/M00/00/00/rBHP-FxIcd-AY53XAACuKxJKzEI702.jpg');
+          this.backgroundImage=this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
         }
       }, 500);
 

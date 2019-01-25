@@ -67,7 +67,7 @@ export class MyApp {
    * 点击推送消息
    */
   getPushMessage(){
-    let request=this.jPushProvider.openNotification().subscribe(result=>{
+    this.jPushProvider.openNotification().subscribe(result=>{
       if(""==result){
         return;
      }
