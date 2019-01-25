@@ -21,8 +21,8 @@ import { SettingPage } from '../setting/setting';
 })
 export class MyPage {
 
-  userLogo=this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+'group1/M00/00/00/rBHP-FxIcd-AY53XAACuKxJKzEI702.jpg');
-  backgroundImage=this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
+  userLogo = this.sanitizer.bypassSecurityTrustUrl('/assets/imgs/user-log.png');
+  backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
 
   items:any;
 
@@ -35,10 +35,7 @@ export class MyPage {
     
     this.items = [{id:1,name:'公开博文'},{id:2,name:'私密博文'},{id:3,name:'我的主题'},{id:4,name:'草稿箱'},{id:5,name:'收藏夹'}];
     this.initUserInfo();
-
-    events.subscribe('token:expired', () => {
-      this.navCtrl.push(LoginPage); 
-    });
+    
     events.subscribe('user:refresh', () => {
       this.initUserInfo();
     });
@@ -46,6 +43,7 @@ export class MyPage {
   }
 
   ionViewDidLoad() {
+    
     console.log('ionViewDidLoad MyPage');
     console.log('登陆中...');
     //this.webApi.login('admin','admin123');
@@ -55,6 +53,7 @@ export class MyPage {
   }
 
   ionViewWillEnter(){
+
     console.log('ionViewWillEnter MyPage');
 
     this.storage.get('isLogin').then((value)=>{
@@ -68,42 +67,51 @@ export class MyPage {
   toUserFans(){
     console.log('function toUserFans()');
   }
+  
   toUserInfo(){
     this.storage.get('isLogin').then((value)=>{ 
       if(value){
         this.navCtrl.push(UserInfoPage);
       }else{
-        this.events.publish('token:expired');
+        this.navCtrl.push(LoginPage); 
       }
      })
   }
+
+  itemSelected(id){
+    console.log(id);
+
+  }
+
   goSetting(){
     this.navCtrl.push(SettingPage);
   }
+  
 
   initUserInfo(){
 
     this.webApi.getUserInfo();
     this.userInfomation = this.userInfo;
 
-    this.storage.get('isLogin').then((value)=>{
+   
 
       this.applicationInterval = setInterval(() => {
-        if(value){
-      
-          this.items = [{id:1,name:'公开博文',nums:1},{id:2,name:'私密博文',nums:0},{id:3,name:'我的主题',nums:0},{id:4,name:'草稿箱',nums:2},{id:5,name:'收藏夹',nums:100}];
-          this.userLogo = this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+this.userInfomation.profilePhoto);
-        
-          this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url('+this.webApi.FILESERVE_HOST+this.userInfomation.backgroundPhoto+')');
-        } else {
-          this.items = [{id:1,name:'公开博文'},{id:2,name:'私密博文'},{id:3,name:'我的主题'},{id:4,name:'草稿箱'},{id:5,name:'收藏夹'}];
-          this.userLogo=this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+'group1/M00/00/00/rBHP-FxIcd-AY53XAACuKxJKzEI702.jpg');
-          this.backgroundImage=this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
-        }
-      }, 500);
+        this.storage.get('isLogin').then((value)=>{
+          if(value){
+            this.items = [{id:1,name:'公开博文',nums:1},{id:2,name:'私密博文',nums:0},{id:3,name:'我的主题',nums:0},{id:4,name:'草稿箱',nums:2},{id:5,name:'收藏夹',nums:100}];
+            this.userLogo = this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST+this.userInfomation.profilePhoto);
+            this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url('+this.webApi.FILESERVE_HOST+this.userInfomation.backgroundPhoto+')');
+          } else {
+            this.items = [{id:1,name:'公开博文'},{id:2,name:'私密博文'},{id:3,name:'我的主题'},{id:4,name:'草稿箱'},{id:5,name:'收藏夹'}];
+            this.userLogo=this.sanitizer.bypassSecurityTrustUrl('/assets/imgs/user-log.png');
+            this.backgroundImage=this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
+          }
+          clearInterval(this.applicationInterval);
+      })
+      }, 2000);
 
       
-    })
+    
 
     
 

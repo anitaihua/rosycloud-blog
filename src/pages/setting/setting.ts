@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events,App } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { MyPage } from '../my/my';
@@ -23,7 +23,7 @@ export class SettingPage {
 
   logOutItem = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage,private webApi:WebApi) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage,private webApi:WebApi,private events:Events,private appCtrl:App) {
 
     this.items = [{id:1,name:'消息设置'},{id:2,name:'意见反馈'},{id:3,name:'评分'},{id:4,name:'清理缓存',nums:'16.1M'},{id:5,name:'关于',nums:'V2.3.2'}];
 
@@ -42,8 +42,11 @@ export class SettingPage {
   }
 
   logOut(){
-    this.webApi.logout();
-    this.navCtrl.push(MyPage);
+    this.webApi.logout().then(()=>{
+      this.events.publish('user:refresh');
+      this.navCtrl.push(MyPage);
+    });
+    
   }
 
 }

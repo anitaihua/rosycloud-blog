@@ -20,6 +20,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CodePush } from '@ionic-native/code-push';
 import { Keyboard } from '@ionic-native/keyboard';
+import { Camera } from '@ionic-native/camera';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { AES256 } from '@ionic-native/aes-256';
 import { SQLite } from '@ionic-native/sqlite';
 import { JPush } from '@jiguang-ionic/jpush';
@@ -44,6 +46,7 @@ import { SettingPage } from '../pages/setting/setting';
 
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -63,7 +66,8 @@ import { SettingPage } from '../pages/setting/setting';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText:''
+      backButtonText:'',
+      tabsHideOnSubPages: 'true' //隐藏全部子页面tabs
     }),
     ComponentsModule,
     IonicStorageModule.forRoot()
@@ -87,6 +91,8 @@ import { SettingPage } from '../pages/setting/setting';
     StatusBar,
     SplashScreen,
     CodePush,
+    Camera,
+    PhotoViewer,
     AES256,
     SQLite,
     JPush,

@@ -120,7 +120,9 @@ export class MyImagePickerComponent {
         // 调用原生接口
         this.camera.getPicture(options).then((data) => {
             this.images.push('data:image/jpeg;base64,' + data);
-        }, (error) => { });
+        }, (error) => {
+            console.log(error);
+         });
     }
 
     /**

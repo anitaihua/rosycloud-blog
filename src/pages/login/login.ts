@@ -28,11 +28,13 @@ export class LoginPage {
   _login(username: HTMLInputElement, password: HTMLInputElement){
     if (username.value.length == 0) {
       this.myToast.show("请输入账号");
-  } else if (password.value.length == 0) {
-    this.myToast.show("请输入密码");
-  } else {
-    this.webApi.login(username.value,password.value);
-    this.navCtrl.push(MyPage);
+    } else if (password.value.length == 0) {
+      this.myToast.show("请输入密码");
+    } else {
+      this.webApi.login(username.value,password.value).then((data)=>{
+        if(data) this.navCtrl.push(MyPage);
+    });
+
   }
 
     

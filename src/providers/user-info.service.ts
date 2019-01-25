@@ -12,8 +12,8 @@ export class UserInfo {
     
     
     public userId: number;
-    public userName: string = '登陆';
-    public nickName: string;
+    public userName: string;
+    public nickName: string = '登陆/注册';
     public realName: string;
     public email: string;
     public telephoneNumber: string;
@@ -48,6 +48,6 @@ export class UserInfo {
     public clear() {
         this.token = '';
         this.uuid = '';
-        this.setExtra({});
+        this.setExtra({nickName: '登陆/注册',introduction: '暂无简介'});
     }
 }

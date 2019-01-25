@@ -13,9 +13,10 @@ import { UserInfo } from './user-info.service';
  */
 @Injectable()
 export class WebApi {
+  
 
     // 域名地址
-    private API_HOST = 'http://192.168.2.237:9101/';
+    private API_HOST = 'http://10.10.10.121:9101/';
 
     public FILESERVE_HOST = 'http://47.94.2.176/';
 
@@ -82,26 +83,30 @@ export class WebApi {
      */
     private handleResult(promise: Promise<Response>) {
         return promise.then((response: Response) => {
-            // 正确：转为json
-            if(response.json().meta.success){
-                return response.json();
-            }else{
+            //不成功
+            if(!response.json().meta.success){
                 // 601错误：token过期
                 console.log('errorCode:'+response.json().meta.errorCode);
                 if (response.json().meta.errorCode == 601) {
                     response.status = 601;
-                    this.events.publish('token:expired');
-                    if (this.userInfo.token == null || this.userInfo.token == '') this.myToast.show('登陆状态过期');
-                }if (response.json().meta.errorCode == 602) {
+                    this.events.publish('token:expired',response.url);
+                    if (this.userInfo.token == null || this.userInfo.token == '') {
+                        //当请求为获取用户信息时，不提示
+                        if(this.getUserListUrl() != response.url){
+                            this.myToast.show('请登陆');
+                        }
+                    }else{
+                        this.myToast.show('登陆状态过期');
+                    }
+                }else if (response.json().meta.errorCode == 602) {
                     response.status = 602;
                     this.myToast.show('用户名或密码错误');
                 }else{
                     this.myToast.show(response.json().meta.message);
                 }
-                
-                return response.json();
+ 
             }
-            
+            return response.json();
 
         }, (error: Response) => {
             // 其它错误：网络错误
@@ -193,20 +198,24 @@ export class WebApi {
     public login(userName: string, password: string) {
         return this.post('tokens', { 'username': userName, 'password': password, 'uuid': this.userInfo.uuid })
             .then((data) => {
-                if (!data.meta.success) throw data.meta.message;
+                if (data.meta.success){
+                    // 写入本地存储
+                    this.storage.set('token', data.data.token);
+                    this.storage.set('uuid', this.userInfo.uuid);
+                    this.userInfo.token = data.data.token;
+                    
 
-                // 写入本地存储
-                this.storage.set('token', data.data.token);
-                this.storage.set('uuid', this.userInfo.uuid);
-                this.userInfo.token = data.data.token;
+                    // 生成请求头
+                    this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
+                    this.get('user/info','').then((data) => {
+                        this.userInfo.setExtra(data.data);
+                        this.events.publish('user:refresh');
+                    });
+                }else{
+                    console.log('登陆失败');
+                }
+                return data.meta.success;
                 
-
-                // 生成请求头
-                this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
-                this.get('user/info','').then((data) => {
-                    this.userInfo.setExtra(data.data);
-                });
-                this.events.publish('user:refresh');
             });
     }
 
@@ -219,15 +228,34 @@ export class WebApi {
         this.userInfo.clear();
         return this.delete('tokens');
     }
+    /**
+     * 获取用户信息URL
+     */
+    public getUserListUrl(){
+        return this.API_HOST + 'user/info';
+    }
 
     public getNoticeList(noticeType: string, page: number, limit: number) {
         return this.post('log/list', { 'page': page, 'limit': limit, 'type': noticeType });
     }
+    /**
+     * 获取博文列表
+     * @param page 
+     * @param limit 
+     */
     public getArticleList(page: number, limit: number){
         return this.post('article/list', { 'page': page, 'limit': limit });
     }
     public getInfoList(page: number, limit: number){
         return this.post('article/list', { 'page': page, 'limit': limit });
     }
+
+    /**
+     *  上传文件
+     * @param imageData 
+     */
+    uploadFile(imageData: string): any {
+        
+      }
 
 }

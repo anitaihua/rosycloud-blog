@@ -18,6 +18,7 @@ export class HomePage extends BaseListPage{
   }
 
   ionViewDidLoad() {
+    this.webApi.getUserInfo();
     this.pullNewList();
   }
 

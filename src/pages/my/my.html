@@ -14,13 +14,13 @@
     <ion-list>
       <div class="login-item" ion-item *ngFor="let item of items" (click)="itemSelected(item.id)">
         {{ item.name }}
-        <div clear item-end>{{ item.nums }}></div>
+        <div clear item-end>{{ item.nums }}<ion-icon name="arrow-dropright"></ion-icon></div>
       </div>  
     </ion-list>
     <ion-list>
       <div class="login-item" ion-item  (click)="goSetting()">
       设置
-      <div clear item-end>></div>
+      <div clear item-end><ion-icon name="arrow-dropright"></ion-icon></div>
     </div>  
   </ion-list>
   </div>

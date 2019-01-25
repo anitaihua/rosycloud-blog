@@ -1,3 +1,31 @@
 page-user-info {
+    .user-info-item{
+        height: rem(206)/$rem;
+        color: #919191;
+        font-size: rem(40)/$rem;
+        i{
+            margin-right: rem(40)/$rem;
+            overflow:hidden; //超出的文本隐藏
+            text-overflow:ellipsis; //溢出用省略号显示
+            white-space:nowrap; //溢出不换行
+            text-align: right;
+            width: rem(500)/$rem;
+        }
+        .user-info-end{
+            display: flex;
+            justify-content:center;
+            align-items:Center;
 
+            
+        }
+    }
+    .user-logo img{
+        width: rem(100)/$rem;
+        height: rem(100)/$rem;
+        border-radius:50%; 
+    }
+    .user-background img{
+        width: rem(100)/$rem;
+        height: rem(100)/$rem;
+    }
 }

@@ -5,6 +5,9 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { NoticeListPage } from '../notice-list/notice-list';
 import { MyPage } from '../my/my';
+import { Events, NavController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
+import { WebApi } from '../../providers/web-api.service';
 
 
 @Component({
@@ -18,8 +21,15 @@ export class TabsPage {
   tab4Root = NoticeListPage;
   tab5Root = MyPage;
 
-  constructor() {
-
+  constructor(public navCtrl: NavController,private events: Events,private webApi:WebApi) {
+    events.subscribe('token:expired', (data) => {
+      
+      let userListUrl = this.webApi.getUserListUrl();
+      if(userListUrl != data){
+        this.navCtrl.push(LoginPage); 
+      }
+      
+    });
   }
   
 }

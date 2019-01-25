@@ -13,6 +13,25 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content >
+  <ion-list>
+    <div class="user-info-item user-logo" ion-item  (click)="changeProfilePhoto()">
+      头像
+      <div clear item-end class="user-info-end"><i><img [src] ="userLogo"></i><ion-icon name="arrow-dropright"></ion-icon></div>
+    </div> 
+    <div class="user-info-item" ion-item  (click)="changeNickName()">
+      昵称
+      <div clear item-end class="user-info-end"><i>{{info.nickName}}</i><ion-icon name="arrow-dropright"></ion-icon></div>
+    </div> 
+    <div class="user-info-item" ion-item  (click)="changeIntroduction()">
+      简介
+      <div clear item-end class="user-info-end"><i>{{info.introduction}}</i><ion-icon name="arrow-dropright"></ion-icon></div>
+    </div>  
+  </ion-list>
+  <ion-list>
+    <div class="user-info-item user-background" ion-item  (click)="changeBackgroundPhoto()">
+      更换背景图
+      <div clear item-end class="user-info-end"><i><img [src] ="backgroundImage"></i><ion-icon name="arrow-dropright"></ion-icon></div>
+    </div> 
+  </ion-list>
 </ion-content>
