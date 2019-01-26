@@ -49,4 +49,26 @@ export class MyAlert {
     }).present();
   }
 
+  /**
+   * 显示确认对话框
+   * @param msg 消息
+   * @param handler 回调函数
+   */
+  public showConfirms(msg:string,cancelhandler:any,okhandler:any){
+    this.alertCtrl.create({
+      title:'提示',
+      subTitle:msg,
+      buttons:[
+        {
+          text:'取消',
+          handler:cancelhandler
+        },
+        {
+          text:'确定',
+          handler:okhandler
+        }
+      ]
+    }).present();
+  }
+
 }

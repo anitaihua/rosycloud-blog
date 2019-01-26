@@ -6,6 +6,8 @@ import { WebApi } from '../../providers/web-api.service';
 
 import { ActionSheetController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
+import { UserInfoIntroductionPage } from './user-info-introduction';
+import { UserInfoNickNamePage } from './user-info-nick-name';
 
 
 
@@ -54,13 +56,13 @@ export class UserInfoPage {
    * 变更昵称
    */
   changeNickName() {
-
+    this.navCtrl.push(UserInfoNickNamePage,this.userInfo.nickName);
   }
   /**
    * 变更简介
    */
   changeIntroduction() {
-    //this.navCtrl.push();
+    this.navCtrl.push(UserInfoIntroductionPage,this.userInfo.introduction);
   }
   /**
    * 更换背景图

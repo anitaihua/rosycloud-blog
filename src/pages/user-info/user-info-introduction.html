@@ -1,0 +1,21 @@
+
+<ion-header>
+    <ion-navbar>
+        
+        <ion-toolbar>
+            <ion-title>编辑简介</ion-title>
+            <ion-buttons end>
+              <button ion-button (click)="save()">
+                保存
+              </button>
+            </ion-buttons>
+          </ion-toolbar>
+      </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content style="background-color: #ededed;">
+    <ion-textarea autoresize [(ngModel)]="readyText" maxlength="100" (ngModelChange)="onChangeText(readyText)"  placeholder="请添加简介">{{introduction}}</ion-textarea>
+    <label>不能超过100个汉字</label>
+</ion-content>

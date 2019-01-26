@@ -1,0 +1,21 @@
+
+<ion-header>
+    <ion-navbar>
+        
+        <ion-toolbar>
+            <ion-title>修改昵称</ion-title>
+            <ion-buttons end>
+              <button ion-button [disabled]="saveStatus" (click)="save()">
+                保存
+              </button>
+            </ion-buttons>
+          </ion-toolbar>
+      </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content style="background-color: #ededed;">
+    <ion-textarea autoresize [(ngModel)]="readyText" maxlength="100" (ngModelChange)="onChangeText(readyText)"  [placeholder]="nickName">{{nickName}}</ion-textarea>
+    <label>4-30个字符(中文占两个字符),支持中英文,数字,“_”或减号</label>
+</ion-content>

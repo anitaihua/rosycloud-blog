@@ -43,6 +43,9 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { UpdatePopover } from './update.component';
 import { SettingPage } from '../pages/setting/setting';
+import { UserInfoIntroductionPage } from '../pages/user-info/user-info-introduction';
+import { DirectivesModule } from '../directives/directives.module';
+import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
 
 
 
@@ -61,6 +64,8 @@ import { SettingPage } from '../pages/setting/setting';
     LoginPage,
     UserInfoPage,
     SettingPage,
+    UserInfoIntroductionPage,
+    UserInfoNickNamePage,
     UpdatePopover
   ],
   imports: [
@@ -71,6 +76,7 @@ import { SettingPage } from '../pages/setting/setting';
       tabsHideOnSubPages: 'true' //隐藏全部子页面tabs
     }),
     ComponentsModule,
+    DirectivesModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -86,6 +92,8 @@ import { SettingPage } from '../pages/setting/setting';
     LoginPage,
     UserInfoPage,
     SettingPage,
+    UserInfoIntroductionPage,
+    UserInfoNickNamePage,
     UpdatePopover
   ],
   providers: [
