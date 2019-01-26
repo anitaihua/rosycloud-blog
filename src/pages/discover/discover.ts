@@ -68,13 +68,14 @@ export class DiscoverPage extends BaseListPage {
 
   constructor(private navCtrl: NavController,protected myLoading:MyLoading, private webApi:WebApi) {
     super(myLoading);
+    
   }
 
   ionViewDidLoad() {
     this.pullNewList();
   }
   pullListImpl(){
-    return this.webApi.getInfoList(this.page,this.limit);
+    return this.webApi.getArticleList(this.page,this.limit);
   }
 
 }

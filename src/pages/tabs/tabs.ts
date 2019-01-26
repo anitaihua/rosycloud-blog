@@ -5,7 +5,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { NoticeListPage } from '../notice-list/notice-list';
 import { MyPage } from '../my/my';
-import { Events, NavController, Tabs, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { WebApi } from '../../providers/web-api.service';
 
@@ -24,6 +24,8 @@ export class TabsPage {
 
   defaultTabNum = 1;
 
+  tabMsgNum;
+
   constructor(private navCtrl: NavController,private events: Events,private webApi:WebApi,private navParams: NavParams) {
     let tabsNum = navParams.get('tabsNum');
 
@@ -39,10 +41,19 @@ export class TabsPage {
       }
       
     });
+    events.subscribe('tabBadge:num', (data) => {
+      
+      this.tabMsgNum = data;
+      
+    });
   }
 
   ionViewDidEnter(){
-    //this.tabRef.select(this.defaultTabNum);
+
+  }
+
+  goArticlePage(){
+    console.log(218678665);
   }
   
 }

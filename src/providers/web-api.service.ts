@@ -235,7 +235,9 @@ export class WebApi {
    
 
     public getNoticeList(noticeType: string, page: number, limit: number) {
+        this.events.publish('tabBadge:num',5);
         return this.post('log/list', { 'page': page, 'limit': limit, 'type': noticeType });
+        
     }
     /**
      * 获取博文列表

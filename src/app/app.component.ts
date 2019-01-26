@@ -16,6 +16,7 @@ import { JpushProvider } from '../providers/my-jpush.service';
 import { MyAlert } from '../providers/my-alert.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { WebApi } from '../providers/web-api.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MyApp {
     private myCodePush: MyCodePush,
     private db: DBService,
     private jPushProvider: JpushProvider,
-    private myAlert: MyAlert
+    private myAlert: MyAlert,
+    private webApi: WebApi
   ) {
     this.platform.ready().then(() => {
       if(this.platform.is('cordova')){
@@ -51,6 +53,9 @@ export class MyApp {
         
         //发起热更新
         //this.myCodePush.hotUpdate();
+
+        //进入首页时候
+        this.webApi.getUserInfo();
       }
       
     });
