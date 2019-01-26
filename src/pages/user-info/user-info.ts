@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { UserInfo } from '../../providers/user-info.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WebApi } from '../../providers/web-api.service';
 
 import { ActionSheetController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
-import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 
 
@@ -21,10 +20,9 @@ export class UserInfoPage {
 
   private info: UserInfo;
 
-  private userLogo: any;
-  private backgroundImage: any;
+  userLogo: any;
+  backgroundImage: any;
 
-  images = [];
 
 
   constructor(
@@ -35,13 +33,12 @@ export class UserInfoPage {
     private webApi: WebApi,
     private actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private photoViewer: PhotoViewer
+    private events: Events
   ) {
     this.info = this.userInfo;
     this.userLogo = this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST + this.info.profilePhoto);
     this.backgroundImage = this.sanitizer.bypassSecurityTrustUrl(this.webApi.FILESERVE_HOST + this.info.backgroundPhoto);
-    console.log(this.userLogo);
-    console.log(this.backgroundImage);
+
   }
 
   ionViewDidLoad() {
@@ -63,7 +60,7 @@ export class UserInfoPage {
    * 变更简介
    */
   changeIntroduction() {
-
+    //this.navCtrl.push();
   }
   /**
    * 更换背景图
@@ -121,15 +118,23 @@ export class UserInfoPage {
 
     // 调用原生接口
     this.camera.getPicture(options).then((data) => {
-      console.log(data.slice(7));
-      let imageData = data.slice(7);
-      if(outType == 'logo'){
-        this.userLogo = this.sanitizer.bypassSecurityTrustResourceUrl(imageData);
-        this.webApi.uploadFile(imageData);
-      }else if(outType == 'background'){
-        this.backgroundImage = this.sanitizer.bypassSecurityTrustResourceUrl(imageData);
-      }
-  
+
+      this.webApi.uploadFile(data).then((response)=>{
+        if(response.meta.success){
+          if(outType == 'logo'){
+            this.userLogo = this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId);
+            this.webApi.editUserLogo(response.data.fileId).then(()=>{
+              this.events.publish('user:refresh');
+            });
+          }else if(outType == 'background'){
+            this.backgroundImage = this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId);
+            this.webApi.editUserBackgroundPhoto(response.data.fileId).then(()=>{
+              this.events.publish('user:refresh');
+            });
+          }
+        }
+      });
+
     }, (error) => {
       console.log(error);
     });

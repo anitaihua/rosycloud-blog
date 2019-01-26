@@ -24,6 +24,8 @@
     "@ionic-native/camera": "^4.19.0",
     "@ionic-native/code-push": "^4.19.0",
     "@ionic-native/core": "~4.18.0",
+    "@ionic-native/file": "^5.0.0",
+    "@ionic-native/file-transfer": "^4.18.0",
     "@ionic-native/keyboard": "^4.19.0",
     "@ionic-native/photo-viewer": "^4.19.0",
     "@ionic-native/screen-orientation": "^4.19.0",
@@ -86,7 +88,9 @@
       "jpush-phonegap-plugin": {
         "APP_KEY": "cc9e33eb53d343ece86ad7ca",
         "CHANNEL": "developer-default"
-      }
+      },
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {}
     },
     "platforms": [
       "android"

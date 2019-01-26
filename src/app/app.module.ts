@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 import { DiscoverPage } from "../pages/discover/discover";
 import { ContactPage } from '../pages/contact/contact';
@@ -88,6 +89,7 @@ import { SettingPage } from '../pages/setting/setting';
     UpdatePopover
   ],
   providers: [
+    FileTransfer,
     StatusBar,
     SplashScreen,
     CodePush,

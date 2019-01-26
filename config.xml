@@ -93,8 +93,8 @@
         <variable name="APP_KEY" value="cc9e33eb53d343ece86ad7ca" />
         <variable name="CHANNEL" value="developer-default" />
     </plugin>
+    <plugin name="cordova-plugin-zip" spec="^3.1.0" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
-    <plugin name="cordova-plugin-zip" spec="^3.1.0" />
     <engine name="android" spec="7.1.4" />
 </widget>

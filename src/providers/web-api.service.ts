@@ -4,6 +4,9 @@ import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/toPromise';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
+
 import { MyToast } from './my-toast.service';
 import { UserInfo } from './user-info.service';
 
@@ -13,7 +16,7 @@ import { UserInfo } from './user-info.service';
  */
 @Injectable()
 export class WebApi {
-  
+
 
     // 域名地址
     private API_HOST = 'http://10.10.10.121:9101/';
@@ -28,7 +31,8 @@ export class WebApi {
         private events: Events,
         private storage: Storage,
         private myToast: MyToast,
-        private userInfo: UserInfo
+        private userInfo: UserInfo,
+        private transfer: FileTransfer
     ) { }
 
     /**
@@ -56,9 +60,9 @@ export class WebApi {
      * get方法
      * @param path 请求路径
      */
-    private get(path: string,paramObj: any) {
+    private get(path: string, paramObj: any) {
         let promise = this.http
-            .get(this.API_HOST + path+ this.toQueryString(paramObj), new RequestOptions({ headers: this.headers }))
+            .get(this.API_HOST + path + this.toQueryString(paramObj), new RequestOptions({ headers: this.headers }))
             .toPromise();
 
         return this.handleResult(promise);
@@ -84,27 +88,27 @@ export class WebApi {
     private handleResult(promise: Promise<Response>) {
         return promise.then((response: Response) => {
             //不成功
-            if(!response.json().meta.success){
+            if (!response.json().meta.success) {
                 // 601错误：token过期
-                console.log('errorCode:'+response.json().meta.errorCode);
+                console.log('errorCode:' + response.json().meta.errorCode);
                 if (response.json().meta.errorCode == 601) {
                     response.status = 601;
-                    this.events.publish('token:expired',response.url);
+                    this.events.publish('token:expired', response.url);
                     if (this.userInfo.token == null || this.userInfo.token == '') {
                         //当请求为获取用户信息时，不提示
-                        if(this.getUserListUrl() != response.url){
+                        if (this.getUserListUrl() != response.url) {
                             this.myToast.show('请登陆');
                         }
-                    }else{
+                    } else {
                         this.myToast.show('登陆状态过期');
                     }
-                }else if (response.json().meta.errorCode == 602) {
+                } else if (response.json().meta.errorCode == 602) {
                     response.status = 602;
                     this.myToast.show('用户名或密码错误');
-                }else{
+                } else {
                     this.myToast.show(response.json().meta.message);
                 }
- 
+
             }
             return response.json();
 
@@ -179,15 +183,15 @@ export class WebApi {
             // 生成请求头
             this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
 
-            return this.get('user/info','').then((data) => {
+            return this.get('user/info', '').then((data) => {
 
                 if (!data.meta.success) {
                     this.storage.set('isLogin', false);
-                }else{
+                } else {
                     this.userInfo.setExtra(data.data);
                     this.storage.set('isLogin', true);
                 }
-                
+
             });
         });
     }
@@ -198,24 +202,24 @@ export class WebApi {
     public login(userName: string, password: string) {
         return this.post('tokens', { 'username': userName, 'password': password, 'uuid': this.userInfo.uuid })
             .then((data) => {
-                if (data.meta.success){
+                if (data.meta.success) {
                     // 写入本地存储
                     this.storage.set('token', data.data.token);
                     this.storage.set('uuid', this.userInfo.uuid);
                     this.userInfo.token = data.data.token;
-                    
+
 
                     // 生成请求头
                     this.headers = new Headers({ 'X-Token': this.userInfo.token, 'uuid': this.userInfo.uuid });
-                    this.get('user/info','').then((data) => {
+                    this.get('user/info', '').then((data) => {
                         this.userInfo.setExtra(data.data);
                         this.events.publish('user:refresh');
                     });
-                }else{
+                } else {
                     console.log('登陆失败');
                 }
                 return data.meta.success;
-                
+
             });
     }
 
@@ -228,12 +232,7 @@ export class WebApi {
         this.userInfo.clear();
         return this.delete('tokens');
     }
-    /**
-     * 获取用户信息URL
-     */
-    public getUserListUrl(){
-        return this.API_HOST + 'user/info';
-    }
+   
 
     public getNoticeList(noticeType: string, page: number, limit: number) {
         return this.post('log/list', { 'page': page, 'limit': limit, 'type': noticeType });
@@ -243,19 +242,79 @@ export class WebApi {
      * @param page 
      * @param limit 
      */
-    public getArticleList(page: number, limit: number){
+    public getArticleList(page: number, limit: number) {
         return this.post('article/list', { 'page': page, 'limit': limit });
     }
-    public getInfoList(page: number, limit: number){
+    public getInfoList(page: number, limit: number) {
         return this.post('article/list', { 'page': page, 'limit': limit });
     }
 
     /**
-     *  上传文件
-     * @param imageData 
+     * 获取用户信息URL
      */
-    uploadFile(imageData: string): any {
+    public getUserListUrl() {
+        return this.API_HOST + 'user/info';
+    }
+
+    /**
+     * 修改用户头像
+     * @param fileId 
+     */
+    public editUserLogo(fileId: string) {
+        return this.post('user/updateLogo', fileId);
+    }
+
+    /**
+     * 修改用户背景图片
+     * @param fileId 
+     */
+    public editUserBackgroundPhoto(fileId: string) {
+        return this.post('user/updateBackgroundPhoto', fileId);
+    }
+
+     /**
+     * 修改用户昵称
+     * @param nickName 
+     */
+    public editUserNickName(nickName: string) {
+        return this.post('user/updateNickName', nickName);
+    }
+
+     /**
+     * 修改用户简介
+     * @param introduction 
+     */
+    public editUserIntroduction(introduction: string) {
+        return this.post('user/updateIntroduction', introduction);
+    }
+
+    /**
+     *  上传文件
+     * @param fiePath 文件内部路径 
+     */
+    uploadFile(fiePath: string): any {
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        // 更多的 Options 可以点进去自己看看，不懂的就谷歌翻译他的注释
+        let options: FileUploadOptions = {
+            fileKey: 'file',
+            fileName: 'name.jpg',  // 文件类型
+            headers: this.headers,
+            params: {}    // 如果要传参数，写这里
+
+        }
+
+        return new Promise((resolve, reject) => {
+            fileTransfer.upload(fiePath, this.API_HOST+'system/uploadFile', options)
+            .then((data) => {
+                this.myToast.show('上传成功');
+                resolve(JSON.parse(data['response']));
+            }, (err) => {
+                console.log(err);
+                this.myToast.show('上传失败');
+                reject(err);
+            })
+        });
         
-      }
+    }
 
 }
