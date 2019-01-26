@@ -5,7 +5,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { NoticeListPage } from '../notice-list/notice-list';
 import { MyPage } from '../my/my';
-import { Events, NavController } from 'ionic-angular';
+import { Events, NavController, Tabs, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { WebApi } from '../../providers/web-api.service';
 
@@ -15,13 +15,22 @@ import { WebApi } from '../../providers/web-api.service';
 })
 export class TabsPage {
 
+
   tab1Root = HomePage;
   tab2Root = DiscoverPage;
   tab3Root = ContactPage;
   tab4Root = NoticeListPage;
   tab5Root = MyPage;
 
-  constructor(public navCtrl: NavController,private events: Events,private webApi:WebApi) {
+  defaultTabNum = 1;
+
+  constructor(private navCtrl: NavController,private events: Events,private webApi:WebApi,private navParams: NavParams) {
+    let tabsNum = navParams.get('tabsNum');
+
+    if(tabsNum){
+      this.defaultTabNum = tabsNum;
+    }
+    
     events.subscribe('token:expired', (data) => {
       
       let userListUrl = this.webApi.getUserListUrl();
@@ -30,6 +39,10 @@ export class TabsPage {
       }
       
     });
+  }
+
+  ionViewDidEnter(){
+    //this.tabRef.select(this.defaultTabNum);
   }
   
 }

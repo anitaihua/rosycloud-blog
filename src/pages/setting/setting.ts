@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Events,App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyPage } from '../my/my';
 import { WebApi } from '../../providers/web-api.service';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the SettingPage page.
@@ -44,7 +45,7 @@ export class SettingPage {
   logOut(){
     this.webApi.logout().then(()=>{
       this.events.publish('user:refresh');
-      this.navCtrl.push(MyPage);
+      this.navCtrl.push(TabsPage,{tabsNum:4});
     });
     
   }

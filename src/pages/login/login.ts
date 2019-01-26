@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WebApi } from '../../providers/web-api.service';
 import { MyToast } from '../../providers/my-toast.service';
 import { MyPage } from '../my/my';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the LoginPage page.
@@ -32,7 +33,7 @@ export class LoginPage {
       this.myToast.show("请输入密码");
     } else {
       this.webApi.login(username.value,password.value).then((data)=>{
-        if(data) this.navCtrl.push(MyPage);
+        if(data) this.navCtrl.push(TabsPage,{tabsNum:4});
     });
 
   }
