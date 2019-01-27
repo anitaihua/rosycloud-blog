@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -11,6 +11,7 @@ import { UserInfo } from '../../providers/user-info.service';
 import { LoginPage } from '../login/login';
 import { UserInfoPage } from '../user-info/user-info';
 import { SettingPage } from '../setting/setting';
+import { MyImagePickerComponent } from '../../components/my-image-picker.component';
 
 
 
@@ -20,6 +21,8 @@ import { SettingPage } from '../setting/setting';
   templateUrl: 'my.html',
 })
 export class MyPage {
+
+  @ViewChild('myImagePickerComponent') myImagePickerComponent: MyImagePickerComponent;  
 
   userLogo = this.sanitizer.bypassSecurityTrustUrl('/assets/imgs/user-log.png');
   backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url(/assets/imgs/user-bg.jpg)');
@@ -41,24 +44,22 @@ export class MyPage {
     });
 
   }
+  /**
+   * 下拉刷新数据
+   * @param refresher 
+   */
+  onRefresh(refresher){
+    this.initUserInfo();
+    refresher.complete();
+  }
 
   ionViewDidLoad() {
-    
     console.log('ionViewDidLoad MyPage');
-    console.log('登陆中...');
-    //this.webApi.login('admin','admin123');
-    console.log('登陆完成...');
-    //this.webApi.getUserInfo();
-    //this.userInfomation = this.userInfo;
   }
 
   ionViewWillEnter(){
 
     console.log('ionViewWillEnter MyPage');
-
-    this.storage.get('isLogin').then((value)=>{
-      console.log(value);
-    })
     
   }
   toUserLove(){
@@ -79,7 +80,8 @@ export class MyPage {
   }
 
   itemSelected(id){
-    console.log(id);
+    
+    console.log(this.myImagePickerComponent.getImageList());
 
   }
 
@@ -93,7 +95,9 @@ export class MyPage {
     this.webApi.getUserInfo();
     this.userInfomation = this.userInfo;
 
-   
+    this.storage.ready().then(() => {
+      console.log('storage ready ');
+    });
 
       this.applicationInterval = setInterval(() => {
         this.storage.get('isLogin').then((value)=>{
@@ -108,14 +112,7 @@ export class MyPage {
           }
           clearInterval(this.applicationInterval);
       })
-      }, 2000);
-
-      
-    
-
-    
-
-    
+      }, 1000); 
   }
 
 }

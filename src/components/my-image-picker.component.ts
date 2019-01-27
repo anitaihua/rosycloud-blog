@@ -33,6 +33,7 @@ export class MyImagePickerComponent {
 
     // 文字标签
     @Input() label = '插入图片';
+    
 
     // 所选图片数组
     private images = [];

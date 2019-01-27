@@ -1,0 +1,7 @@
+<div class="cover-box">
+    <img class="image-item" *ngFor="let image of images" [src]="image" >
+    <div class="add-cover" (click)="getPicture(0)">添加封面</div>
+    <div class="cover-title">
+        <ion-input type="text" value="" placeholder="这里可输入标题" ></ion-input>
+    </div>
+</div>

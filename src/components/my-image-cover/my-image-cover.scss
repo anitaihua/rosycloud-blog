@@ -1,0 +1,23 @@
+my-image-cover {
+    width: 100%;
+    .cover-box{
+        margin: rem(48)/$rem 0;
+        .add-cover{
+            margin: 0 auto;
+            width: rem(1028)/$rem;
+            height: rem(82)/$rem;
+            text-align: center;
+            font-size: rem(36)/$rem;
+            color: #666666;
+            line-height: rem(82)/$rem;
+            background-color: #ededed;
+        }
+        .cover-title{
+            margin: 0 auto;
+            width: rem(1028)/$rem;
+            height: rem(82)/$rem;
+            line-height: rem(82)/$rem;
+        }
+    }
+    
+}

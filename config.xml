@@ -96,5 +96,6 @@
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
+    <plugin name="cordova-plugin-telerik-imagepicker" spec="2.2.3" />
     <engine name="android" spec="7.1.4" />
 </widget>

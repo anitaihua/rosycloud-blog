@@ -2,6 +2,7 @@
 
 
 <ion-content>
+  <ion-refresher my-refresher (ionRefresh)="onRefresh($event)"></ion-refresher>
   <div class="login-content" [style.background-image]="backgroundImage">
     <div class="login-header" (click)="toUserInfo()">
       <img [src]="userLogo">
@@ -24,4 +25,5 @@
     </div>  
   </ion-list>
   </div>
+  <my-image-picker #myImagePickerComponent></my-image-picker>
 </ion-content>

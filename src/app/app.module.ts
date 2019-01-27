@@ -23,6 +23,7 @@ import { CodePush } from '@ionic-native/code-push';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Camera } from '@ionic-native/camera';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { AES256 } from '@ionic-native/aes-256';
 import { SQLite } from '@ionic-native/sqlite';
 import { JPush } from '@jiguang-ionic/jpush';
@@ -103,6 +104,7 @@ import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
     CodePush,
     Camera,
     PhotoViewer,
+    ImagePicker,
     AES256,
     SQLite,
     JPush,
