@@ -17,6 +17,8 @@ export class MyImageCoverComponent {
 
   // 所选图片数组
   private images = [];
+  //标题
+  private coverTitle:string;
 
   constructor(
     private camera: Camera
@@ -47,11 +49,25 @@ export class MyImageCoverComponent {
   }
 
   /**
+   * 移除图片
+   */
+  private removePicture(){
+    this.images = [];
+  }
+
+  /**
    * 获取所选图片
    */
   public getImage() {
     return this.images[0];
-}
+  }
+
+  /**
+   * 获取封面标题
+   */
+  public getCoverTitle(){
+    return this.coverTitle;
+  }
 
   /**
    * 获取所选图片列表

@@ -7,7 +7,7 @@ import { Component,Input  } from '@angular/core';
 })
 export class ImgLazyLoadComponent {
 
-  default: string = 'assets/images/default.png';
+  default: string = 'assets/imgs/default.png';
 
   @Input() src: string; //要显示的图片
 

@@ -47,6 +47,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { UserInfoIntroductionPage } from '../pages/user-info/user-info-introduction';
 import { DirectivesModule } from '../directives/directives.module';
 import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
+import { DateService } from '../providers/my-date.service';
 
 
 
@@ -115,6 +116,7 @@ import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
     MyLoading,
     MyCodePush,
     MyToast,
+    DateService,
     UserInfo,
     WebApi,
     DBService,

@@ -1,0 +1,40 @@
+<div class="content-box">
+  <div class="first-add-buttons">
+    <div class="add-button">
+        <ion-icon name="create"></ion-icon>
+    </div>
+    <div class="add-button">
+        <ion-icon name="image"></ion-icon>
+    </div>
+  </div>
+  <div class="item-content" *ngFor="let articleContent of articleContents; let i=index">
+    <div class="article-content">
+        <img class="close" src="/assets/imgs/close-image.png" (click)="removeArticleContent()" alt="">
+        <div class="article-type-text" *ngIf="articleContent.type=='text'">吴佩孚所发生的</div>
+        <div class="article-type-image" *ngIf="articleContent.type=='image'">
+          <div class="image">
+              <img src="/assets/imgs/1.jpg" alt="">
+          </div>
+          <div class="text">
+            <ion-input type="text"  value="" placeholder="输入图片描述" ></ion-input>
+          </div>
+        </div>
+        <div class="article-type-video" *ngIf="articleContent.type=='video'">
+          <div class="image">
+            <img src="/assets/imgs/2.jpg" alt="">
+          </div>
+          <div class="text">
+            <ion-input type="text"  value="" placeholder="输入视频描述" ></ion-input>
+          </div>
+        </div>
+    </div>
+    <div class="add-buttons">
+        <div class="add-button">
+            <ion-icon name="create"></ion-icon>
+        </div>
+        <div class="add-button">
+            <ion-icon name="image"></ion-icon>
+        </div>
+    </div>
+  </div>
+</div>

@@ -9,13 +9,15 @@ import { IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { ImgLazyLoadComponent } from './img-lazy-load.component';
 import { MyImageCoverComponent } from './my-image-cover/my-image-cover';
+import { MyArticleContentComponent } from './my-article-content/my-article-content';
 @NgModule({
 	declarations: [MySliceComponent,
 	MyImagePickerComponent,
 	MyInfiniteComponent,
 	MyRefresherComponent,
     ImgLazyLoadComponent,
-    MyImageCoverComponent
+    MyImageCoverComponent,
+    MyArticleContentComponent
 	],
 	imports: [BrowserModule,HttpModule,IonicModule],
 	exports: [MySliceComponent,
@@ -23,7 +25,8 @@ import { MyImageCoverComponent } from './my-image-cover/my-image-cover';
 	MyInfiniteComponent,
 	MyRefresherComponent,
     ImgLazyLoadComponent,
-    MyImageCoverComponent
+    MyImageCoverComponent,
+    MyArticleContentComponent
 	]
 })
 export class ComponentsModule {}

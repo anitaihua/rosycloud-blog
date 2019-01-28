@@ -1,7 +1,10 @@
 <div class="cover-box">
     <img class="image-item" *ngFor="let image of images" [src]="image" >
-    <div class="add-cover" (click)="getPicture(0)">添加封面</div>
-    <div class="cover-title">
-        <ion-input type="text" value="" placeholder="这里可输入标题" ></ion-input>
+    <div class="button-box" *ngIf="images.length>0">
+        <img src="/assets/imgs/change-image.png" (click)="getPicture(0)" alt=""><img src="/assets/imgs/close-image.png" (click)="removePicture()" alt="">
+    </div>
+    <div class="add-cover" (click)="getPicture(0)" *ngIf="images.length==0">添加封面</div>
+    <div class="cover-title" [ngStyle]="{'color':images.length===0?'':'#ffffff'}">
+        <ion-input type="text"  [(ngModel)]="coverTitle" value="" placeholder="这里可输入标题" ></ion-input>
     </div>
 </div>

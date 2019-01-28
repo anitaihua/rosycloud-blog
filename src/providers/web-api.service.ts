@@ -101,6 +101,10 @@ export class WebApi {
                         }
                     } else {
                         this.myToast.show('登陆状态过期');
+                        //清除缓存token信息
+                        this.storage.remove('token');
+                        this.storage.remove('uuid');
+                        this.userInfo.clear();
                     }
                 } else if (response.json().meta.errorCode == 602) {
                     response.status = 602;
