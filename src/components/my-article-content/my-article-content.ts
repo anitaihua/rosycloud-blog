@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
 import { ArticleContentItemPage } from '../../pages/article-content-item/article-content-item';
+import { WebApi } from '../../providers/web-api.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the MyArticleContentComponent component.
@@ -14,13 +17,18 @@ import { ArticleContentItemPage } from '../../pages/article-content-item/article
 })
 export class MyArticleContentComponent {
 
-  text: string;
+  articleContents = [
+    {type:'video',url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKuATUccABEVbHcFZvQ820.mp4')},
+    {type:'image',url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKOAGNEFAAwBsQBB80E265.jpg')}
+  ];
 
-  articleContents = [{type:'text'},{type:'image'},{type:'video'}];
-
-  constructor(private navCtrl: NavController) {
+  constructor(
+    private navCtrl: NavController,
+     private camera: Camera,
+     private webApi:WebApi,
+     private sanitizer: DomSanitizer
+     ) {
     console.log('Hello MyArticleContentComponent Component');
-    this.text = 'Hello World';
   }
 
   removeArticleContent(index:number){
@@ -34,19 +42,68 @@ export class MyArticleContentComponent {
   }
 
   addArticleContentItemByText(index:number){
-    if(index>=0){
-      this.articleContents.splice(index+1,0,{type:'text'});
-    }else{
-      this.articleContents.unshift({type:'text'});
-    }
-   
+
+    let data: Object = {
+      type:'text',
+      callback: data => {
+        if(index>=0){
+          this.articleContents.splice(index+1,0,data);
+        }else{
+          this.articleContents.unshift(data);
+        }
+      }
+    };
+    this.navCtrl.push(ArticleContentItemPage,data);
   }
 
   addArticleContentItemByImageOrVideo(index:number){
-    if(index>=0){
-      this.articleContents.splice(index+1,0,{type:'video'});
+    this.getPicture(index);
+  }
+
+    /**
+     * 获取图片（FILE_URI）
+     */
+    private getPicture(index:number) {
+      let options = {
+          destinationType: this.camera.DestinationType.FILE_URI,
+          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit: true,
+          targetHeight:536,
+          targetWidth:1122,
+          correctOrientation: false,
+          mediaType: this.camera.MediaType.ALLMEDIA
+      };
+
+      // 调用原生接口
+      this.camera.getPicture(options).then((camerData) => {
+        let type = this.getFileExt(camerData);
+        this.webApi.uploadFile(camerData).then((response)=>{
+          if(response.meta.success){
+            let data = {
+              type:type,
+              url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId)
+            };
+            if(index>=0){
+              this.articleContents.splice(index+1,0,data);
+            }else{
+              this.articleContents.unshift(data);
+            }
+          }
+        });
+      }, (error) => {
+          console.log(error);
+       });
+  }
+
+  private getFileExt(filePath:string){
+    var extPoint = filePath.lastIndexOf(".");
+    var ext = filePath.substring(extPoint + 1, filePath.length).toLowerCase();
+    if(/(3gp|mp4|avi)$/.test(ext)){
+      return 'video';
+    }else if(/(gif|jpg|jpeg|png)$/.test(ext)){
+      return 'image';
     }else{
-      this.articleContents.unshift({type:'image'});
+      return '';
     }
   }
 

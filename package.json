@@ -63,11 +63,13 @@
     "jpush-phonegap-plugin": "^3.6.2",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
+    "videogular2": "^6.1.0",
     "ws": "^6.1.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.1",
+    "@types/core-js": "^2.5.0",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",

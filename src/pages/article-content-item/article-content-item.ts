@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import 'rxjs/add/operator/toPromise';
 
 /**
  * Generated class for the ArticleContentItemPage page.
@@ -15,11 +16,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ArticleContentItemPage {
 
+  private type:string;
+
+  private articleContent;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.type = this.navParams.get('type');
+    this.articleContent = this.navParams.data;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArticleContentItemPage');
+  }
+
+  save(){
+    let callback = this.navParams.get('callback');
+    let data = {
+      type: this.type
+    };
+    callback(data);
+    this.navCtrl.pop();
   }
 
 }

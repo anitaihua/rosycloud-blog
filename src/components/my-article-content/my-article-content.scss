@@ -39,7 +39,7 @@ my-article-content {
                 .article-type-image, .article-type-video{
                     height: rem(436)/$rem;
                     
-                    .image{
+                    .image img,.image video{
                         position: absolute;
                         top: rem(74)/$rem;
                         left: rem(64)/$rem;

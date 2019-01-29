@@ -299,11 +299,16 @@ export class WebApi {
      * @param fiePath 文件内部路径 
      */
     uploadFile(fiePath: string): any {
+        //获取最后一个/的位置
+        var site = fiePath.lastIndexOf("\/");
+        //截取最后一个/后的值
+        let fileName = fiePath.substring(site + 1, fiePath.length);
+
         const fileTransfer: FileTransferObject = this.transfer.create();
         // 更多的 Options 可以点进去自己看看，不懂的就谷歌翻译他的注释
         let options: FileUploadOptions = {
             fileKey: 'file',
-            fileName: 'name.jpg',  // 文件类型
+            fileName: fileName,  // 文件类型
             headers: this.headers,
             params: {}    // 如果要传参数，写这里
 

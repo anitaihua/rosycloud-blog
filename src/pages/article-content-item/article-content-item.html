@@ -1,18 +1,46 @@
-<!--
-  Generated template for the ArticleContentItemPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>article-content-item</ion-title>
+      <ion-toolbar>
+          <ion-buttons end>
+            <button *ngIf="type=='text'" ion-button (click)="save()">
+              确定
+            </button>
+            <button *ngIf="type=='image'" ion-button (click)="changeImage()">
+              更换
+            </button>
+            <button *ngIf="type=='video'" ion-button (click)="save()">
+              保存
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <div class="text">
+    
+  </div>
+  <div class="image" *ngIf="type=='image'">
+      <img [src]="articleContent.url" alt="">
+  </div>
+  <div class="video" *ngIf="type=='video'">
+      <vg-player>
+          <vg-overlay-play></vg-overlay-play>
+          <vg-buffering></vg-buffering>
+          <vg-controls [vgAutohide]="true" [vgAutohideTime]="5">
+            <vg-play-pause></vg-play-pause>
+            <vg-time-display [vgProperty]="'current'"></vg-time-display>
+            <vg-scrub-bar>
+              <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
+              <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+            <vg-time-display [vgProperty]="'total'"></vg-time-display>
+            <vg-fullscreen></vg-fullscreen>
+          </vg-controls>
+          <video #media [vgMedia]="media" [src]="articleContent.url" autoplay></video>
+        </vg-player>
+  </div>
+    
+    
 </ion-content>

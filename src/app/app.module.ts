@@ -49,6 +49,10 @@ import { DirectivesModule } from '../directives/directives.module';
 import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
 import { DateService } from '../providers/my-date.service';
 import { ArticleContentItemPage } from '../pages/article-content-item/article-content-item';
+import { ArticleContentItemPageModule } from '../pages/article-content-item/article-content-item.module';
+
+
+
 
 
 
@@ -69,12 +73,13 @@ import { ArticleContentItemPage } from '../pages/article-content-item/article-co
     SettingPage,
     UserInfoIntroductionPage,
     UserInfoNickNamePage,
-    ArticleContentItemPage,
     UpdatePopover
   ],
   imports: [
     BrowserModule,
+    BrowserModule,
     HttpModule,
+    ArticleContentItemPageModule,
     IonicModule.forRoot(MyApp,{
       backButtonText:'',
       tabsHideOnSubPages: 'true' //隐藏全部子页面tabs
