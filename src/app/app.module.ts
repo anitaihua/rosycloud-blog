@@ -48,6 +48,7 @@ import { UserInfoIntroductionPage } from '../pages/user-info/user-info-introduct
 import { DirectivesModule } from '../directives/directives.module';
 import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
 import { DateService } from '../providers/my-date.service';
+import { ArticleContentItemPage } from '../pages/article-content-item/article-content-item';
 
 
 
@@ -68,6 +69,7 @@ import { DateService } from '../providers/my-date.service';
     SettingPage,
     UserInfoIntroductionPage,
     UserInfoNickNamePage,
+    ArticleContentItemPage,
     UpdatePopover
   ],
   imports: [
@@ -96,6 +98,7 @@ import { DateService } from '../providers/my-date.service';
     SettingPage,
     UserInfoIntroductionPage,
     UserInfoNickNamePage,
+    ArticleContentItemPage,
     UpdatePopover
   ],
   providers: [

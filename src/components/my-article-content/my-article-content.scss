@@ -29,8 +29,13 @@ my-article-content {
                     left: rem(20)/$rem;
                     width: rem(86)/$rem;
                     height: rem(86)/$rem;
+                    opacity:0.6;
                 }
                 position: relative;
+                .article-type-text{
+                    font-size: rem(40)/$rem;
+                    padding: rem(58)/$rem;
+                }
                 .article-type-image, .article-type-video{
                     height: rem(436)/$rem;
                     
