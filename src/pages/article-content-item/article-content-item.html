@@ -18,8 +18,9 @@
 
 
 <ion-content>
-  <div class="text">
-    
+  <div class="text" *ngIf="type=='text'">
+      <ion-textarea autoresize [(ngModel)]="readyText" maxlength="100" (ngModelChange)="onChangeText(readyText)">{{contentText}}</ion-textarea>
+      <label>不能超过100个汉字</label>
   </div>
   <div class="image" *ngIf="type=='image'">
       <img [src]="articleContent.url" alt="">

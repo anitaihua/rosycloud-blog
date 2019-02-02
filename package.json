@@ -37,7 +37,7 @@
     "@jiguang-ionic/jpush": "^1.0.2",
     "@types/ws": "^6.0.1",
     "code-push": "^2.0.6",
-    "com-sarriaroman-photoviewer": "^1.1.18",
+    "com-sarriaroman-photoviewer": "1.1.18",
     "cordova-android": "7.1.4",
     "cordova-plugin-aes256-encryption": "^1.1.0",
     "cordova-plugin-camera": "^4.0.3",
@@ -76,7 +76,6 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-code-push": {},
-      "com-sarriaroman-photoviewer": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
@@ -95,7 +94,8 @@
       },
       "cordova-plugin-file": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-telerik-imagepicker": {}
+      "cordova-plugin-telerik-imagepicker": {},
+      "com-sarriaroman-photoviewer": {}
     },
     "platforms": [
       "android"

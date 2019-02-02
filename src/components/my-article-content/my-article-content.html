@@ -8,9 +8,9 @@
     </div>
   </div>
   <div class="item-content" *ngFor="let articleContent of articleContents; let i=index">
-    <div class="article-content" (click)="editArticleContentItem(articleContent)">
+    <div class="article-content" (click)="editArticleContentItem(i,articleContent)">
         <img class="close" src="assets/imgs/close-image.png" (click)="removeArticleContent(i)" alt="">
-        <div class="article-type-text" *ngIf="articleContent.type=='text'">吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的吴佩孚所发生的</div>
+        <div class="article-type-text" *ngIf="articleContent.type=='text'">{{articleContent.contentText}}</div>
         <div class="article-type-image" *ngIf="articleContent.type=='image'">
           <div class="image">
               <img [src]="articleContent.url" alt="">
@@ -21,7 +21,7 @@
         </div>
         <div class="article-type-video" *ngIf="articleContent.type=='video'">
           <div class="image">
-            <video [src]="articleContent.url"></video>
+              <img [src]="articleContent.ImgUrl" alt="">
           </div>
           <div class="text">
             <ion-input type="text" readonly="true" value="" placeholder="输入视频描述" ></ion-input>

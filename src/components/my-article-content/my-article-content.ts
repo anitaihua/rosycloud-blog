@@ -6,9 +6,7 @@ import { WebApi } from '../../providers/web-api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 /**
- * Generated class for the MyArticleContentComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
+ * 
  * Components.
  */
 @Component({
@@ -18,7 +16,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class MyArticleContentComponent {
 
   articleContents = [
-    {type:'video',url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKuATUccABEVbHcFZvQ820.mp4')},
+    {type:'text',contentText:'12345678qwertyui'},
+    {type:'video',ImgUrl:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKOAGNEFAAwBsQBB80E265.jpg'),url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKuATUccABEVbHcFZvQ820.mp4')},
     {type:'image',url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +'group1/M00/00/00/rBHP-FxQUKOAGNEFAAwBsQBB80E265.jpg')}
   ];
 
@@ -37,7 +36,11 @@ export class MyArticleContentComponent {
 
   }
 
-  editArticleContentItem(articleContent:any){
+  editArticleContentItem(index:number,articleContent:any){
+    articleContent.callback = (responeData) => {
+      this.articleContents.splice(index,1,responeData);
+    }
+    
     this.navCtrl.push(ArticleContentItemPage,articleContent);
   }
 
@@ -45,14 +48,16 @@ export class MyArticleContentComponent {
 
     let data: Object = {
       type:'text',
-      callback: data => {
+      callback: (responeData) => {
+        console.log(responeData);
         if(index>=0){
-          this.articleContents.splice(index+1,0,data);
+          this.articleContents.splice(index+1,0,responeData);
         }else{
-          this.articleContents.unshift(data);
+          this.articleContents.unshift(responeData);
         }
       }
     };
+    
     this.navCtrl.push(ArticleContentItemPage,data);
   }
 
@@ -81,7 +86,8 @@ export class MyArticleContentComponent {
           if(response.meta.success){
             let data = {
               type:type,
-              url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId)
+              url:this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId),
+              ImgUrl:type=='video'?this.sanitizer.bypassSecurityTrustResourceUrl(this.webApi.FILESERVE_HOST +response.data.fileId2):null
             };
             if(index>=0){
               this.articleContents.splice(index+1,0,data);
