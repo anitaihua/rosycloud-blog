@@ -1,0 +1,36 @@
+<ion-content padding style="background-image:url(/assets/imgs/login-bg.png);transform: rotate(90deg);width: 100%;background-attachment: fixed;background-color: #0172ac;">
+
+  <div class="logo">
+    <div class="img">
+        <img src="/assets/imgs/login_logo.png" alt="">
+    </div>
+    <div class="title">
+      <span>天网实名申报系统</span></div>
+  </div>
+  
+  <ion-list inset>
+    <ion-item>
+      <ion-input type="text" value="" placeholder="用户名" #username></ion-input>
+      <ion-icon ios="ios-person" md="md-person" item-end [ngStyle]="iconStyle"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [type]="isShow ? 'text':'password'" value="" placeholder="密码" #password></ion-input>
+      <ion-icon ios="ios-key" md="md-key" item-end [ngStyle]="iconStyle"></ion-icon>
+    </ion-item>
+
+    <ion-item no-lines>
+      <ion-label>
+        <!-- 控制字体图标的显示是由 ios 以及 md 两个属性控制的  -->
+        <ion-icon [ios]="isShow ? 'ios-eye' : 'ios-eye-off'" [md]="isShow ? 'md-eye' : 'md-eye-off'"></ion-icon>
+      </ion-label>
+      <ion-toggle checked="false" [(ngModel)]="isShow"></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding class="login-buttons">
+    <button ion-button  color="primary" (click)="_login(username, password)">登录</button>
+    <button ion-button  color="primary" (click)="_login(username, password)">注册</button>
+  </div>
+</ion-content>

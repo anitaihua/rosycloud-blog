@@ -8,6 +8,7 @@ import { MyPage } from '../my/my';
 import { Events, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { WebApi } from '../../providers/web-api.service';
+import { NewLoginPage } from '../new-login/new-login';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { WebApi } from '../../providers/web-api.service';
 export class TabsPage {
 
 
-  tab1Root = HomePage;
+  tab1Root = NewLoginPage;
   tab2Root = DiscoverPage;
   tab3Root = ContactPage;
   tab4Root = NoticeListPage;

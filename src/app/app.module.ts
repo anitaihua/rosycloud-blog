@@ -50,6 +50,7 @@ import { UserInfoNickNamePage } from '../pages/user-info/user-info-nick-name';
 import { DateService } from '../providers/my-date.service';
 import { ArticleContentItemPage } from '../pages/article-content-item/article-content-item';
 import { ArticleContentItemPageModule } from '../pages/article-content-item/article-content-item.module';
+import { NewLoginPage } from '../pages/new-login/new-login';
 
 
 
@@ -69,6 +70,7 @@ import { ArticleContentItemPageModule } from '../pages/article-content-item/arti
     ArticlePage,
     MyPage,
     LoginPage,
+    NewLoginPage,
     UserInfoPage,
     SettingPage,
     UserInfoIntroductionPage,
@@ -99,6 +101,7 @@ import { ArticleContentItemPageModule } from '../pages/article-content-item/arti
     ArticlePage,
     MyPage,
     LoginPage,
+    NewLoginPage,
     UserInfoPage,
     SettingPage,
     UserInfoIntroductionPage,

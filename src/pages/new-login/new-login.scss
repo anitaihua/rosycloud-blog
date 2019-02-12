@@ -1,0 +1,39 @@
+page-new-login {
+    .logo{
+        text-align: center;
+        
+        .img{
+            vertical-align: top;
+            height: rem(206)/$rem;
+            display: inline-block;
+            width: rem(206)/$rem;
+ 
+
+        }
+        .title{
+            font-size: rem(50)/$rem;
+            color: #ffffff;
+            font-weight: bold;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: rem(20)/$rem;
+            
+        }
+        .title span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: rem(410)/$rem;
+            height: rem(206)/$rem;
+            
+        }
+
+    }
+    .login-buttons{
+        width: 100%;
+        button{
+            width: 48%;
+        }
+    }
+
+}
